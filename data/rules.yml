@@ -1,0 +1,247 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+#- rule: Get Crypto Price Intent
+#  steps:
+#  - intent: get_crypto_price
+#  - action: action_get_price
+#
+#- rule: Get Crypto Volume Intent
+#  steps:
+#  - intent: get_crypto_volume
+#  - action: action_get_volume
+
+- rule: Activate Fancy Crypto Form
+  steps:
+  - intent: get_crypto_price_dup
+  - action: action_validate_slots
+  - action: action_validate_Coin
+  - action: fancy_crypto_form
+  - active_loop: fancy_crypto_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_get_price
+  - action: action_reset_slot
+
+- rule: Activate Fancy Crypto Form2
+  steps:
+  - intent: get_crypto_volume
+  - action: action_validate_slots
+  - action: action_validate_Coin
+  - action: fancy_crypto_form
+  - active_loop: fancy_crypto_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_get_volume
+  - action: action_reset_slot
+
+- rule: Activate Fancy Crypto Form3
+  steps:
+  - intent: quotes_latest_v2
+  - action: action_validate_Coin
+  - action: fancy_crypto_form
+  - active_loop: fancy_crypto_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_get_extra_questions
+  - action: action_reset_slot
+
+#- rule: Submit Fancy Crypto Form
+#  condition:
+#  - active_loop: fancy_crypto_form
+#  steps:
+#  - action: fancy_crypto_form
+#  - active_loop: null
+#  - slot_was_set:
+#    - requested_slot: null
+##  - action: utter_submit
+#  - action: action_get_price
+#  - action: action_reset_slot
+
+
+- rule: top gainers losers
+  steps:
+  - intent: crypto_top_gainers_losers
+  - action: action_validate_slots
+  - action: action_get_top_gainers_losers
+  - action: action_reset_slot
+
+- rule: most visited coins
+  steps:
+  - intent: crypto_most_visited
+  - action: action_validate_slots
+  - action: action_get_most_visited
+  - action: action_reset_slot
+
+- rule: trending latest
+  steps:
+  - intent: trending_latest
+  - action: action_validate_slots
+  - action: action_get_trending_latest
+  - action: action_reset_slot
+
+- rule: global metrics
+  steps:
+  - intent: global_metric
+  - action: action_get_global_metrics
+
+- rule: Activate meta data Form
+  steps:
+  - intent: meta_data
+  - action: action_validate_Coin
+  - action: fancy_crypto_form
+  - active_loop: fancy_crypto_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_get_metadata
+  - action: action_reset_slot
+
+- rule: exchange data
+  steps:
+  - intent: get_exchange
+  - action: action_get_exchange
+
+- rule: exchange information
+  steps:
+  - intent: exchange_information
+  - action: action_get_exchange_info
+
+- rule: exchange map
+  steps:
+  - intent: exchange_map
+  - action: action_get_exchange_map
+
+- rule: new coins
+  steps:
+  - intent: newly_added_coins
+  - action: action_get_new_coins
+
+- rule: activate price conversion form
+  steps:
+    - intent: price_conversion
+    - action: action_validate_Coin
+    - action: fancy_crypto_form
+    - active_loop: fancy_crypto_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_get_price_conversion
+    - action: action_reset_slot
+
+- rule: air drops
+  steps:
+  - intent: crypto_airdrops
+  - action: action_get_air_drops
+
+- rule: handel out of scope
+  steps:
+  - intent: out_of_scope
+  - action: action_out_of_scope
+
+- rule: ticker details
+  steps:
+  - intent: ticker_details
+  - action: stocks_form
+  - active_loop: stocks_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: action_get_ticker_details
+  - action: action_reset_slot
+
+- rule: ticker news
+  steps:
+  - intent: ticker_news
+  - action: stocks_form
+  - active_loop: stocks_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: action_get_ticker_news
+  - action: action_reset_slot
+
+- rule: market holidays
+  steps:
+  - intent: market_holidays
+  - action: action_get_market_holidays
+
+- rule: market status
+  steps:
+  - intent: market_status
+  - action: action_get_market_status
+
+- rule: ticker dividends
+  steps:
+  - intent: ticker_dividends
+  - action: stocks_form
+  - active_loop: stocks_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: action_get_ticker_dividends
+  - action: action_reset_slot
+
+- rule: ticker splits
+  steps:
+  - intent: ticker_splits
+  - action: stocks_form
+  - active_loop: stocks_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: action_get_ticker_splits
+  - action: action_reset_slot
+
+- rule: ticker daily open close
+  steps:
+  - intent: ticker_daily_open_close
+  - action: stocks_form
+  - active_loop: stocks_form
+  - active_loop: null
+  - slot_was_set:
+      - requested_slot: null
+  - action: action_get_ticker_daily_open_close
+  - action: action_reset_slot
+
+- rule: ticket gainers losers
+  steps:
+  - intent: ticker_gainers_losers
+  - action: action_get_ticker_gainers_losers
+#- rule: Activate Fancy Crypto Form2
+#  steps:
+#  - intent: get_crypto_volume
+#  - action: action_validate_slots
+#  - action: fancy_crypto_form
+#  - active_loop: fancy_crypto_form
+#
+#- rule: Submit Fancy Crypto Form2
+#  condition:
+#  - active_loop: fancy_crypto_form
+#  steps:
+#  - action: fancy_crypto_form
+#  - active_loop: null
+#  - slot_was_set:
+#    - requested_slot: null
+##  - action: utter_submit
+#  - action: action_get_volume
+#  - action: action_reset_slot
+
+
+
+
+

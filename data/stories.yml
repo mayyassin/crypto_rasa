@@ -1,0 +1,315 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+#- story: interactive_story_1
+#  steps:
+#    - intent: get_crypto_price
+#      entities:
+#      - crypto: Bitcoin
+#    - action: action_get_price
+#
+#- story: interactive_story_2
+#  steps:
+#    - intent: get_crypto_volume
+#      entities:
+#      - crypto: Bitcoin
+#    - action: action_get_volume
+
+#- story: interactive_story_3
+#  steps:
+#  - intent: greet
+#  - action: utter_greet
+#  - intent: get_crypto_price_dup
+#  - action: action_validate_slots
+#  - action: fancy_crypto_form
+#  - active_loop: fancy_crypto_form
+#  - slot_was_set:
+#    - requested_slot: crypto_name2
+#  - slot_was_set:
+#    - crypto_name2: solana
+#  - slot_was_set:
+#    - requested_slot: null
+#  - active_loop: null
+##  - action: utter_submit
+#  - action: action_get_price
+#  - action: action_reset_slot
+#  - intent: goodbye
+#  - action: utter_goodbye
+
+#- story: interactive_story_4
+#  steps:
+#  - intent: greet
+#  - action: utter_greet
+#  - intent: get_crypto_volume
+#  - action: action_validate_slots
+#  - action: fancy_crypto_form
+#  - active_loop: fancy_crypto_form
+#  - slot_was_set:
+#    - requested_slot: crypto_name2
+#  - slot_was_set:
+#    - crypto_name2: solana
+#  - slot_was_set:
+#    - requested_slot: null
+#  - active_loop: null
+##  - action: utter_submit
+#  - action: action_get_volume
+#  - action: action_reset_slot
+#  - intent: goodbye
+#  - action: utter_goodbye
+
+
+
+- story: interactive_story_1
+  steps:
+  - intent: meta_data
+    entities:
+    - metadata: website
+    #- coin: $
+    - crypto_dup: idex
+    - exchange: idex
+    - crypto_dup: idex
+  - action: action_validate_Coin
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - crypto_name2: idex
+  - action: fancy_crypto_form
+  - active_loop: fancy_crypto_form
+  - slot_was_set:
+    - crypto_name2: idex
+  - slot_was_set:
+    - metadata: website
+  - slot_was_set:
+    - exchange: idex
+  - slot_was_set:
+    - crypto_name2: idex
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_get_metadata
+  - action: action_reset_slot
+  - slot_was_set:
+    - hl_price: null
+  - slot_was_set:
+    - duration: null
+  - slot_was_set:
+    - time: null
+  - slot_was_set:
+    - price_change: null
+  - slot_was_set:
+    - crypto_name2: null
+  - intent: exchange_information
+    entities:
+    - exchange_info: website
+    - exchange: idex
+    - exchange: idex
+    - crypto_dup: idex
+  - slot_was_set:
+    - exchange: idex
+  - slot_was_set:
+    - exchange_info: website
+  - action: action_get_exchange_info
+
+- story: interactive_story_2
+  steps:
+  - intent: quotes_latest_v2
+    entities:
+    - crypto_dup: $moonshine
+    - extra_q: cmc_rank
+  - slot_was_set:
+    - extra_q: cmc_rank
+  - slot_was_set:
+    - crypto_dup:
+      - $moonshine
+  - action: action_validate_Coin
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - unique_coin:
+      - moonshine
+  - action: fancy_crypto_form
+  - active_loop: fancy_crypto_form
+  - slot_was_set:
+    - extra_q: cmc_rank
+  - slot_was_set:
+    - crypto_dup:
+      - $moonshine
+  - slot_was_set:
+    - requested_slot: crypto_name2
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_get_extra_questions
+  - action: action_reset_slot
+  - slot_was_set:
+    - hl_price: null
+  - slot_was_set:
+    - duration: null
+  - slot_was_set:
+    - time: null
+  - slot_was_set:
+    - price_change: null
+  - slot_was_set:
+    - crypto_name2: null
+
+- story: interactive_story_7
+  steps:
+  - intent: meta_data
+    entities:
+    - metadata: twitter
+    - crypto_dup: $btc
+  - slot_was_set:
+    - metadata: twitter
+  - slot_was_set:
+    - crypto_dup:
+      - $btc
+  - action: action_validate_Coin
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - unique_coin:
+      - bitcoin
+  - action: fancy_crypto_form
+  - active_loop: fancy_crypto_form
+  - slot_was_set:
+    - metadata: twitter
+  - slot_was_set:
+    - crypto_dup:
+      - $btc
+  - slot_was_set:
+    - requested_slot: crypto_name2
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_get_metadata
+  - action: action_reset_slot
+  - slot_was_set:
+    - hl_price: null
+  - slot_was_set:
+    - duration: null
+  - slot_was_set:
+    - time: null
+  - slot_was_set:
+    - price_change: null
+  - slot_was_set:
+    - crypto_name2: null
+  - intent: exchange_information
+    entities:
+    - exchange_info: twitter
+    - exchange: idex
+    - exchange: idex
+  - slot_was_set:
+    - exchange: idex
+  - slot_was_set:
+    - exchange_info: twitter
+  - action: action_get_exchange_info
+
+- story: interactive_story_8
+  steps:
+  - intent: get_exchange
+    entities:
+    - exchange_var: num_coins
+    - exchange: wazirx
+    - exchange: wazirx
+  - slot_was_set:
+    - exchange: wazirx
+  - slot_was_set:
+    - exchange_var: num_coins
+  - action: action_get_exchange
+
+
+- story: interactive_story_9
+  steps:
+  - intent: global_metric
+    entities:
+    - global_metrics: num_coins
+  - slot_was_set:
+    - global_metrics: num_coins
+  - action: action_get_global_metrics
+
+
+- story: interactive_story_11
+  steps:
+  - intent: global_metric
+    entities:
+    - global_metrics: derivative_volume_usd
+  - slot_was_set:
+    - global_metrics: derivative_volume_usd
+  - action: action_get_global_metrics
+
+
+- story: interactive_story_12
+  steps:
+  - intent: get_exchange
+    entities:
+    - exchange_var: derivative_volume_usd
+    - exchange: idex
+    - exchange: idex
+  - slot_was_set:
+    - exchange: idex
+  - slot_was_set:
+    - exchange_var: derivative_volume_usd
+  - action: action_get_exchange
+
+- story: interactive_story_1
+  steps:
+  - intent: ticker_splits
+    entities:
+    - stocks: '#meta'
+  - slot_was_set:
+    - stocks: '#meta'
+  - action: stocks_form
+  - active_loop: stocks_form
+  - slot_was_set:
+    - stocks: '#meta'
+  - slot_was_set:
+    - requested_slot: symbol
+  - slot_was_set:
+    - requested_slot: null
+  - slot_was_set:
+    - symbol: META
+  - active_loop: null
+  - action: action_get_ticker_splits
+  - action: action_reset_slot
+  - slot_was_set:
+    - hl_price: null
+  - slot_was_set:
+    - duration: null
+  - slot_was_set:
+    - time: null
+  - slot_was_set:
+    - price_change: null
+  - slot_was_set:
+    - crypto_name2: null
+  - slot_was_set:
+    - symbol: null
+  - slot_was_set:
+    - stocks: null

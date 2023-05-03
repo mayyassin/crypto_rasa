@@ -1,0 +1,251 @@
+version: '3.1'
+intents:
+- affirm
+- ask_time
+- bot_challenge
+- crypto_airdrops
+- crypto_most_visited
+- crypto_top_gainers_losers
+- deny
+- exchange_information
+- exchange_map
+- get_crypto_price
+- get_crypto_price_dup
+- get_crypto_volume
+- get_exchange
+- global_metric
+- goodbye
+- greet
+- market_holidays
+- market_status
+- meta_data
+- mood_great
+- mood_unhappy
+- newly_added_coins
+- out_of_scope
+- price_conversion
+- quotes_latest_v2
+- ticker_daily_open_close
+- ticker_details
+- ticker_dividends
+- ticker_news
+- ticker_splits
+- trending_latest
+- ticker_gainers_losers
+entities:
+- stocks
+- exchange
+- exchange_var
+- global_metrics
+- metadata
+- crypto_dup
+- exchange_info
+- extra_q
+- crypto
+- time
+- duration
+- quantity
+- hl_price
+- top_gl
+- price_change
+- convert
+- number
+- exchange_active
+responses:
+  utter_user_details:
+  - custom:
+      message: "How did you like it? Please rate from 1 to 5:"
+      platform: "kommunicate"
+      metadata:
+        contentType : "300"
+        templateId : "7"
+
+  utter_greet:
+  - text: Hey! How are you?
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_ask_crypto_name2:
+  - text: Which coin do you want ?
+  utter_ask_symbol:
+  - text: Which stock do you want ?
+  utter_submit:
+  - text: got it
+  utter_time:
+  - text: It is {time}.
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+actions:
+- action_ask_crypto_name2
+- action_ask_symbol
+- action_get_air_drops
+- action_get_exchange
+- action_get_exchange_info
+- action_get_exchange_map
+- action_get_extra_questions
+- action_get_global_metrics
+- action_get_market_holidays
+- action_get_market_status
+- action_get_metadata
+- action_get_most_visited
+- action_get_new_coins
+- action_get_price
+- action_get_price_conversion
+- action_get_ticker_daily_open_close
+- action_get_ticker_details
+- action_get_ticker_dividends
+- action_get_ticker_news
+- action_get_ticker_splits
+- action_get_top_gainers_losers
+- action_get_trending_latest
+- action_get_volume
+- action_out_of_scope
+- action_reset_slot
+- action_validate_Coin
+- action_validate_slots
+- validate_fancy_crypto_form
+- validate_stocks_form
+- action_get_ticker_gainers_losers
+slots:
+  crypto_name2:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: fancy_crypto_form
+        requested_slot: crypto_name2
+  symbol:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: stocks_form
+        requested_slot: symbol
+  time:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+  duration:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+  quantity:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: quantity
+  hl_price:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: hl_price
+  top_gl:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: top_gl
+  price_change:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: price_change
+  extra_q:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: extra_q
+  global_metrics:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: global_metrics
+  metadata:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: metadata
+  exchange:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: exchange
+  exchange_var:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: exchange_var
+  exchange_active:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: exchange_active
+  exchange_info:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: exchange_info
+  crypto_dup:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: crypto_dup
+  duplicate_coin:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: custom
+  unique_coin:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: custom
+  number:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+  stocks:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: stocks
+  stocks_gainers:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: stocks_gainers
+forms:
+  fancy_crypto_form:
+    required_slots:
+    - crypto_name2
+  stocks_form:
+    required_slots:
+    - symbol
